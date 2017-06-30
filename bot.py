@@ -7,7 +7,7 @@ import time
 TOKEN = "439659276:AAFoPRUbHjsLOmEtN5aDieR1HjU_VojBmUY"
 CHAT_ID = "64750298"
 POLONIEX_URL = "http://poloniex.com/public?command=returnTicker"
-BITTREX_URL = "https://bittrex.com/api/v1.1/public/getticker?market=bt"
+BITTREX_URL = "https://bittrex.com/api/v1.1/public/getticker?market=btc-waves"
 BOT_URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
 BTC_LTC = 0
@@ -47,10 +47,21 @@ while run:
 		#print 'BTC_LTC :', coinInfo['BTC_LTC']['last']
 		TEMP = float(coinInfo['BTC_LTC']['last'])
 		CH = diff(PRICE_LTC, TEMP)
+		print 'debug ltc = ', CH
 		if CH > 1.05:
 			PRICE_LTC = TEMP
 			send_message('LTC', CHAT_ID)
 			send_message(PRICE_LTC, CHAT_ID)
+
+	if BTC_WAVES == 1:
+		coinInfo = json.loads(get_url(BITTREX_URL))
+		TEMP = float(coinInfo['result']['Last'])
+		CH = diff(PRICE_WAVES, TEMP)
+		print 'debug waves = ', CH
+		if CH > 1.05:
+			PRICE_WAVES = TEMP
+			MSG = "WAVES =", TEMP
+			send_message(MSG, CHAT_ID)
 
 	time.sleep(30)
 
