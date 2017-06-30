@@ -50,8 +50,8 @@ while run:
 		print 'debug ltc = ', CH
 		if CH > 1.05:
 			PRICE_LTC = TEMP
-			send_message('LTC', CHAT_ID)
-			send_message(PRICE_LTC, CHAT_ID)
+			MSG = "LTC =", TEMP
+			send_message(MSG, CHAT_ID)
 
 	if BTC_WAVES == 1:
 		coinInfo = json.loads(get_url(BITTREX_URL))
